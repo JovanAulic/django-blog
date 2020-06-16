@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Dodajte Novu Kategoriju!{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<br>
+<h1> Dodajte kategoriju</h1>
+<br>
+<hr>
+<div class="form-group">
+<form method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button class="btn btn-secondary">Dodajte Kategoriju</button>
+</div>
+{% else %}
+	Niste prijavljeni! Nemate mogućnost mijenjanja sadržaja.
+{% endif %}
+{% endblock %}

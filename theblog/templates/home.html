@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Postovi</h1>
+<hr>
+<ul>
+{% for post in object_list %}
+     <li><a href="{% url 'article-detail' post.pk %}"> 
+     {{ post.naslov }}</a>-
+    <a href="{% url 'category' post.kategorija|slugify %}"> {{ post.kategorija }}</a>
+     -{{ post.autor.first_name}}
+     	{{ post.autor.last_name}} - 
+     	{% if user.is_authenticated%}
+        {% if user.id == post.autor.id %}
+     	<small><a class="btn btn-outline-secondary btn-sm"   href="{% url 'update-post' post.pk %}">Izmijeni post</a>
+        <a class="btn btn-outline-secondary btn-sm"  href="{% url 'delete-post' post.pk %}"> Izbriši</a></small>
+     	{% endif %}
+        <br>
+        {% endif %}
+        {{ post.vanjski_tekst }}
+      </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ cats }} Kategorija</h1>
+<ul>
+{%for post in category_post %}
+	<li><a href="{% url 'article-detail' post.pk %}"> 
+     {{ post.naslov }}</a> -{{ post.autor.first_name}}
+     	{{ post.autor.last_name}} - <small>
+     		{% if user.is_authenticated%}
+
+     	<a href="{% url 'update-post' post.pk %}">Izmijeni post</a>
+        <a href="{% url 'delete-post' post.pk %}"> Izbriši</a>
+     	   {% endif %}
+        </small><br>
+      {{ post.tekst | slice:":100" }}</li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

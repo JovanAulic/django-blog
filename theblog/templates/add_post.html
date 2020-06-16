@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Dodajte Novi Post!{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<br>
+<h1> Dodajte novi post!</h1>
+<br>
+<hr>
+<div class="form-group">
+<form method="POST">
+	{% csrf_token %}
+	{{ form.media }}
+	{{ form.as_p }}
+	<button class="btn btn-secondary">Post</button>
+</div>
+
+<script>
+	var ime = "{{ user.first_name }}";
+	document.getElementById("vase_ime").value
+	= ime;
+
+</script>
+
+{% else %}
+	Niste prijavljeni! Nemate mogućnost mijenjanja sadržaja.
+{% endif %}
+{% endblock %}
